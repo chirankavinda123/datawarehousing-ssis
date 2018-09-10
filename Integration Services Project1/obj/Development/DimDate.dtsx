@@ -1,0 +1,881 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/26/2018 8:13:15 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="IMLAB_08"
+  DTS:CreatorName="IMLAB_08\DIM"
+  DTS:DTSID="{3FC5693D-92DE-4B73-A6A2-A60CBD0D48FF}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="DimDate"
+  DTS:PackageType="5"
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{EF5DD371-E5BD-48DE-B5C1-251C618642B2}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[IMLAB_08\SQLEXPRESS.dw_assignment]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E51D2FD0-45B9-45B7-9346-7D76F307B656}"
+      DTS:ObjectName="IMLAB_08\SQLEXPRESS.dw_assignment">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=IMLAB_08\SQLEXPRESS;Initial Catalog=dw_assignment;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{724D00B4-0DEB-4419-867E-1CAEFC1A02DC}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[Dim_Date]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[Dim_Date]) [refTable]
+where [refTable].[Date_sk] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="Date_sk" dataType="DT_WSTR" length="300" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Date" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DateValue" dataType="DT_STR" length="15" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="Month" dataType="DT_WSTR" length="30" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="MonthValue" dataType="DT_WSTR" length="30" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Quarter" dataType="DT_WSTR" length="30" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="QuarterValue" dataType="DT_WSTR" length="30" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Year" dataType="DT_WSTR" length="30" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="YearValue" dataType="DT_WSTR" length="30" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Data Flow Task\604:invalid};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[IMLAB_08\SQLEXPRESS.dw_assignment]"
+                  connectionManagerRefId="Package.ConnectionManagers[IMLAB_08\SQLEXPRESS.dw_assignment]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Lookup.Inputs[Lookup Input].Columns[Date_sk]"
+                      cachedDataType="wstr"
+                      cachedLength="300"
+                      cachedName="Date_sk"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[Date_sk]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">Date_sk</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[Date_sk]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="300"
+                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[Date_sk]"
+                      name="Date_sk"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Date_sk</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\OLE DB Destination - Dim_Date"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination - Dim_Date"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Dim_Date]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[IMLAB_08\SQLEXPRESS.dw_assignment]"
+                  connectionManagerRefId="Package.ConnectionManagers[IMLAB_08\SQLEXPRESS.dw_assignment]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].Columns[Date_sk]"
+                      cachedDataType="wstr"
+                      cachedLength="300"
+                      cachedName="Date_sk"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].ExternalColumns[Date_sk]"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[Date_sk]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].Columns[Date]"
+                      cachedDataType="dbDate"
+                      cachedName="Date"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].ExternalColumns[Date]"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[Date]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].Columns[DateValue]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="DateValue"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].ExternalColumns[DateValue]"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[DateValue]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].Columns[Month]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Month"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].ExternalColumns[Month]"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[Month]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].Columns[MonthValue]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="MonthValue"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].ExternalColumns[MonthValue]"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[MonthValue]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].Columns[Quarter]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Quarter"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].ExternalColumns[Quarter]"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[Quarter]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].Columns[QuarterValue]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="QuarterValue"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].ExternalColumns[QuarterValue]"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[QuarterValue]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].Columns[Year]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Year"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].ExternalColumns[Year]"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[Year]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].Columns[YearValue]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="YearValue"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].ExternalColumns[YearValue]"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[YearValue]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].ExternalColumns[Date_sk]"
+                      dataType="wstr"
+                      length="300"
+                      name="Date_sk" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].ExternalColumns[Date]"
+                      dataType="dbDate"
+                      name="Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].ExternalColumns[DateValue]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="DateValue" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].ExternalColumns[Month]"
+                      dataType="wstr"
+                      length="30"
+                      name="Month" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].ExternalColumns[MonthValue]"
+                      dataType="wstr"
+                      length="30"
+                      name="MonthValue" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].ExternalColumns[Quarter]"
+                      dataType="wstr"
+                      length="30"
+                      name="Quarter" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].ExternalColumns[QuarterValue]"
+                      dataType="wstr"
+                      length="30"
+                      name="QuarterValue" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].ExternalColumns[Year]"
+                      dataType="wstr"
+                      length="30"
+                      name="Year" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input].ExternalColumns[YearValue]"
+                      dataType="wstr"
+                      length="30"
+                      name="YearValue" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLEDB Source - Dim_Date Quering"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">use dw_assignment
+DECLARE @StartDate DATETIME;
+DECLARE @EndDate DATETIME;
+DECLARE @Date DATETIME;
+
+SET    @StartDate = '1/1/2013'
+SET @EndDate = '12/31/2016'
+SET @Date = @StartDate;
+
+WHILE @Date &lt;= @EndDate
+	
+     BEGIN
+		INSERT INTO
+             [dbo].[Dim_Date] 
+             (
+                 [Date_sk]
+                 ,[Date]
+                 ,[DateValue]
+                 ,[Month]
+                 ,[MonthValue]
+                 ,[Quarter]
+                 ,[QuarterValue]
+                 ,[Year]
+                 ,[YearValue]
+             )
+
+			 SELECT
+				 s.testing
+                  ,CONVERT(VARCHAR(4), DATEPART(mm, @Date)) + '/' + DATENAME(dd, @Date) + '/' + DATENAME(yyyy, @Date)
+                  ,@Date
+                  ,DATENAME(mm, @Date) + ', ' + DATENAME(yyyy, @Date)
+                  ,LEFT(DATENAME(mm, @Date),3) + '-' + RIGHT(DATEPART(yyyy, @Date),2)
+                  ,'Quarter ' + DATENAME(qq, @Date) + ', ' + DATENAME(yyyy, @Date)
+                  ,DATEPART(qq, @Date)
+                  ,DATENAME(yyyy, @Date)
+                  ,DATEPART(yyyy, @Date)
+				  FROM (SELECT DATEPART(yyyy, @Date) * 10000 + DATEPART(mm, @Date) * 100 + DATEPART(dd, @Date) AS testing) s
+			WHERE  testing NOT IN (SELECT [Date_sk] from Dim_Date)
+			
+		SET @Date = DATEADD(DAY, 1, @Date)
+      END
+
+SELECT * from Dim_Date;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[IMLAB_08\SQLEXPRESS.dw_assignment]"
+                  connectionManagerRefId="Package.ConnectionManagers[IMLAB_08\SQLEXPRESS.dw_assignment]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[Date_sk]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].ExternalColumns[Date_sk]"
+                      length="300"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[Date_sk]"
+                      name="Date_sk"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[Date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].ExternalColumns[Date]"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[Date]"
+                      name="Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[DateValue]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].ExternalColumns[DateValue]"
+                      length="15"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[DateValue]"
+                      name="DateValue"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[Month]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].ExternalColumns[Month]"
+                      length="30"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[Month]"
+                      name="Month"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[MonthValue]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].ExternalColumns[MonthValue]"
+                      length="30"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[MonthValue]"
+                      name="MonthValue"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[Quarter]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].ExternalColumns[Quarter]"
+                      length="30"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[Quarter]"
+                      name="Quarter"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[QuarterValue]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].ExternalColumns[QuarterValue]"
+                      length="30"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[QuarterValue]"
+                      name="QuarterValue"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[Year]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].ExternalColumns[Year]"
+                      length="30"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[Year]"
+                      name="Year"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[YearValue]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].ExternalColumns[YearValue]"
+                      length="30"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].Columns[YearValue]"
+                      name="YearValue"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].ExternalColumns[Date_sk]"
+                      dataType="wstr"
+                      length="300"
+                      name="Date_sk" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].ExternalColumns[Date]"
+                      dataType="dbDate"
+                      name="Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].ExternalColumns[DateValue]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="DateValue" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].ExternalColumns[Month]"
+                      dataType="wstr"
+                      length="30"
+                      name="Month" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].ExternalColumns[MonthValue]"
+                      dataType="wstr"
+                      length="30"
+                      name="MonthValue" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].ExternalColumns[Quarter]"
+                      dataType="wstr"
+                      length="30"
+                      name="Quarter" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].ExternalColumns[QuarterValue]"
+                      dataType="wstr"
+                      length="30"
+                      name="QuarterValue" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].ExternalColumns[Year]"
+                      dataType="wstr"
+                      length="30"
+                      name="Year" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output].ExternalColumns[YearValue]"
+                      dataType="wstr"
+                      length="30"
+                      name="YearValue" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output].Columns[Date_sk]"
+                      dataType="wstr"
+                      length="300"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output].Columns[Date_sk]"
+                      name="Date_sk" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output].Columns[Date]"
+                      dataType="dbDate"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output].Columns[Date]"
+                      name="Date" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output].Columns[DateValue]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output].Columns[DateValue]"
+                      name="DateValue" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output].Columns[Month]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output].Columns[Month]"
+                      name="Month" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output].Columns[MonthValue]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output].Columns[MonthValue]"
+                      name="MonthValue" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output].Columns[Quarter]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output].Columns[Quarter]"
+                      name="Quarter" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output].Columns[QuarterValue]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output].Columns[QuarterValue]"
+                      name="QuarterValue" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output].Columns[Year]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output].Columns[Year]"
+                      name="Year" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output].Columns[YearValue]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output].Columns[YearValue]"
+                      name="YearValue" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Lookup No Match Output]"
+              endId="Package\Data Flow Task\OLE DB Destination - Dim_Date.Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\Data Flow Task\Lookup.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\OLEDB Source - Dim_Date Quering.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="196.5,30.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="244,42"
+          Id="Package\Data Flow Task\OLEDB Source - Dim_Date Quering"
+          TopLeft="251,31" />
+        <NodeLayout
+          Size="228,42"
+          Id="Package\Data Flow Task\OLE DB Destination - Dim_Date"
+          TopLeft="259,240" />
+        <NodeLayout
+          Size="113,42"
+          Id="Package\Data Flow Task\Lookup"
+          TopLeft="315,104" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="372.25,73">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31"
+              Start="0,0"
+              End="0,23.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Lookup No Match Output]"
+          TopLeft="372.25,146">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,94"
+              Start="0,0"
+              End="0,86.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,86.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-55.80638671875,37.4453125,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLEDB Source - Dim_Date Quering">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLE DB Destination - Dim_Date">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[Dim_Date]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
